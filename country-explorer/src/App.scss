@@ -56,7 +56,7 @@
   }
 
   .main_input::placeholder{
-    color: snow;
+    color: #d6d4d4;
   }
 
   .main_input{
@@ -65,6 +65,13 @@
 }
 
 [data-theme="cupcake"] {
+  .App{
+    background-color: #FFF2D8;
+    min-height: 100vh;
+  }
+  .main_input{
+    background-color: #FCF6EC;
+  }
   .title {
     color: #000505;
   }
