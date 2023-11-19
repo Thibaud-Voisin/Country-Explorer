@@ -1,0 +1,84 @@
+@font-face {
+  font-family: 'SuisseIntl';
+  src: url('./fonts/SuisseIntl-Regular.ttf') format('truetype');
+}
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Questrial&display=swap');@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+.container {
+  max-width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.theme_selector {
+  position: absolute;
+  padding: 10px;
+  fill: snow;
+}
+
+.main_input {
+  border-radius: 10px;
+}
+
+.title {
+  font-family: 'SuisseIntl', sans-serif;
+    margin-top: 14vh;
+  font-size: 100px;
+  font-weight: bold;
+  color: snow;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.sub_title {
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 30px;
+  margin-top : 4.5vh;
+  font-weight: bold;
+  color: snow;
+}
+
+[data-theme="dark"] {
+  .App {
+    background-color: #060224;
+    min-height: 100vh;
+  }
+
+  .main_input::placeholder{
+    color: snow;
+  }
+
+  .main_input{
+    border-color: snow;
+  }
+}
+
+[data-theme="cupcake"] {
+  .title {
+    color: #000505;
+  }
+  
+  .sub_title{
+    color: #000505;
+  }
+  
+  .theme_selector{
+    fill: #000505;
+  }
+
+  .footer
+  {
+    background-color: #000505;
+  }
+}
