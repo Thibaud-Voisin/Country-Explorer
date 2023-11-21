@@ -6,10 +6,18 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-
+.App{
+  min-height: 100vh;
+  overflow: hidden;
+}
+::-webkit-scrollbar {
+  display: none;
+}
 
 .container {
-  max-width: 100%;
+  min-width: 100vw;
+  //100-6 (footer size)
+  min-height: 94vh;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -52,8 +60,6 @@
 [data-theme="dark"] {
   .App {
     background: linear-gradient(140deg, rgba(6,2,36,1) 0%, rgba(4,4,54,1) 100%);
-
-    min-height: 100vh;
   }
 
   .main_input::placeholder{
@@ -68,7 +74,6 @@
 [data-theme="cupcake"] {
   .App{
     background: linear-gradient(320deg, rgba(250,230,189,1) 0%, rgba(254,251,247,1) 100%);
-    min-height: 100vh;
   }
   .main_input{
     background-color: #FCF6EC;

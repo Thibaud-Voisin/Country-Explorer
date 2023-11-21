@@ -1,7 +1,6 @@
 import './App.scss';
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import AnimatedTextCharacter from "./AnimatedTextCharacter";
 import AnimatedSubTextCharacter from "./AnimatedSubTextCharacter";
 import Select, { components } from 'react-select';
 
@@ -10,16 +9,31 @@ function App() {
 
   const [theme, setTheme] = useState('dark');
   const [options, setOptions] = useState([]);
+  const [showTextInput, setshowTextInput] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [isVisibleAlert, setIsVisibleAlert] = useState(false); // State to manage visibility
+  const texts = ["COUNTRY EXPLORER", "EXPLORADOR DE PAÍSES", "国 家 探 险 家",  "COUNTRY EXPLORER", "LÄNDERFORSCHER ", "EXPLORATEUR DE PAYS"]; // Your list of texts
+
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'cupcake' : 'dark');
   };
   // initially set the theme and "listen" for changes to apply them to the HTML tag
   useEffect(() => {
+    setTimeout(() => {
+      setshowTextInput(true);
+    }, 600);
+  
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % texts.length);
+    }, 4500);
+  
     const fetchData = async () => {
       try {
         const response = await fetch('https://restcountries.com/v3.1/all'); // Replace with your API endpoint
         if (!response.ok) {
+          setIsVisibleAlert(!isVisibleAlert); // Toggle visibility when clicked
+          console.log('Error fetching data');
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
@@ -27,30 +41,23 @@ function App() {
           value: `option${index + 1}`,
           label: country.name.common,
           icon: country.flags.png // Assuming the 'flags' object contains the URL for the icon
-      }));
-      const sortedOptions = fetchedOptions.sort((a, b) => a.label.localeCompare(b.label));
-      setOptions(sortedOptions);
+        }));
+        const sortedOptions = fetchedOptions.sort((a, b) => a.label.localeCompare(b.label));
+        setOptions(sortedOptions);
       } catch (error) {
+        setIsVisibleAlert(!isVisibleAlert); // Toggle visibility when clicked
         console.error('Error fetching data:', error);
         // Handle errors or set appropriate state to indicate the error
       }
     };
     fetchData();
+  
     document.querySelector('html').setAttribute('data-theme', theme);
-  }, [theme]);
-  const [showSubText, setShowSubText] = useState(false);
-  const [showTextInput, setshowTextInput] = useState(false);
-
-  useEffect(() => {
-    // After the AnimatedTextCharacter animation is done, show the AnimatedSubTextCharacter
-    const timeout = setTimeout(() => {
-      setShowSubText(true);
-    }, 400); // Adjust this timing based on the AnimatedTextCharacter animation duration
-    setTimeout(() => {
-      setshowTextInput(true);
-    }, 1200); 
-    return () => clearTimeout(timeout);
-  }, []);
+  
+    return () => {
+      clearInterval(interval);
+    };
+  }, [texts.length, theme, isVisibleAlert]);
 
   const selectStyles = {
     control: (base, state) => ({
@@ -66,8 +73,7 @@ function App() {
       border: '1px solid gray', // Change the border style based on focus
       boxShadow: 'none',
       '&:hover': theme === 'dark' ? {border: '1px solid white'} : {border: '1px solid black'},
-      
-      color: theme === 'dark' ? 'white' : 'black', // Change the text color based on the theme
+      color: theme === 'dark' ? 'white' : 'black',
     }),
     option: (provided, state) => ({
       ...provided,
@@ -90,6 +96,10 @@ function App() {
     singleValue:(base) => ({
       ...base,
       color: theme === 'dark' ? 'white': 'black', // Change the color of the input text here
+    }),
+    placeholder: (base) => ({
+      ...base,
+      color: 'gray', // Change the color of the input text here
     }),
   };
 
@@ -116,20 +126,53 @@ function App() {
           <svg className="swap-on w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
           <svg className="swap-off w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
         </label>
+    <div>
+      {isVisibleAlert && (
+        <motion.div className='flex justify-center items-center w-screen' 
+        initial={{ opacity: 0}}
+        animate={{ opacity: 1}}
+        transition={{ duration: 0.2 }}>
+        <div role="alert" className="alert alert-error w-[50vw] mt-5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="stroke-current shrink-0 h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>Error | Unable to fetch country list. Check your internet connection</span>
+        </div>
+      </motion.div>
+      )}
+    </div>
       </header>
 
     <div className="container">
+    <div>
+      <AnimatePresence mode='wait'>
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5 }}
+          className="title"
+        >
+          {texts[index]}
+        </motion.div>
+      </AnimatePresence>
+    </div>
       <AnimatePresence>
-        <AnimatedTextCharacter
-          key="text"
-          text="COUNTRY EXPLORER"
-        />
-        {showSubText && (
           <AnimatedSubTextCharacter
             key="subText"
             text="Select a country and discover its languages, capital, currencies and much more !!"
           />
-        )}
         {showTextInput && (
         <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
@@ -138,6 +181,7 @@ function App() {
       >
 <div style={{ display: 'flex', alignItems: 'center' }}>
   <Select
+    placeholder='Select a country...'
     searchable
     options={options}
     onChange={(selectedOption) => {
@@ -147,15 +191,19 @@ function App() {
     components={{ Option: IconOption }}
   />
 
-  <button className={`ml-1 rounded-r-lg mt-[4vh] text-lg h-[8vh] w-[7vw] border border-gray-500 ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'} ${theme === 'dark' ? 'text-white' : 'text-black'} ${theme === 'dark' ? 'hover:border-white' : 'hover:border-black'}`}>Search</button>
+  <button className={`ml-1 rounded-r-lg mt-[4vh] text-xl h-[8vh] w-[7vw] border border-gray-500 ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'} ${theme === 'dark' ? 'text-white' : 'text-black'} ${theme === 'dark' ? 'hover:border-white' : 'hover:border-black'}`}>Search</button>
 </div>
         </motion.div>
       
       
         )}
       </AnimatePresence>
+
     </div>
-    <footer className="footer items-center p-4 bg-neutral text-neutral-content">
+    <div className='result w-[100vw] bg-gray-50 h-[100vh]'>
+
+    </div>
+    <footer className="footer h-[6vh] items-center p-4 bg-neutral text-neutral-content">
   <aside className="items-center grid-flow-col">
     <p>Copyright © 2023 Bounce Insights - All right reserved</p>
   </aside> 
