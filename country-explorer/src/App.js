@@ -3,14 +3,39 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedTextCharacter from "./AnimatedTextCharacter";
 import AnimatedSubTextCharacter from "./AnimatedSubTextCharacter";
+import Select, { components } from 'react-select';
+
 
 function App() {
+
   const [theme, setTheme] = useState('dark');
+  const [options, setOptions] = useState([]);
+
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'cupcake' : 'dark');
   };
   // initially set the theme and "listen" for changes to apply them to the HTML tag
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://restcountries.com/v3.1/all'); // Replace with your API endpoint
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        const fetchedOptions = data.map((country, index) => ({
+          value: `option${index + 1}`,
+          label: country.name.common,
+          icon: country.flags.png // Assuming the 'flags' object contains the URL for the icon
+      }));
+      const sortedOptions = fetchedOptions.sort((a, b) => a.label.localeCompare(b.label));
+      setOptions(sortedOptions);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        // Handle errors or set appropriate state to indicate the error
+      }
+    };
+    fetchData();
     document.querySelector('html').setAttribute('data-theme', theme);
   }, [theme]);
   const [showSubText, setShowSubText] = useState(false);
@@ -23,9 +48,65 @@ function App() {
     }, 400); // Adjust this timing based on the AnimatedTextCharacter animation duration
     setTimeout(() => {
       setshowTextInput(true);
-    }, 1600); 
+    }, 1200); 
     return () => clearTimeout(timeout);
   }, []);
+
+  const selectStyles = {
+    control: (base, state) => ({
+      ...base,
+      padding: '0 0 0 1rem',
+      textAlign: 'left',
+      borderRadius: '0.5rem  0 0 0.5rem',
+      margin: '4vh 0 0 0',
+      fontSize: '1.5rem',
+      height: '8vh',
+      width: '50vw',
+      backgroundColor: theme === 'dark' ? '#1f2937' : 'white',
+      border: '1px solid gray', // Change the border style based on focus
+      boxShadow: 'none',
+      '&:hover': theme === 'dark' ? {border: '1px solid white'} : {border: '1px solid black'},
+      
+      color: theme === 'dark' ? 'white' : 'black', // Change the text color based on the theme
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      color: theme === 'dark' ? 'white': 'black', // Change the color of the option text here
+      backgroundColor: theme === 'dark' ? state.isFocused ? '#1d2229' : '#2a323c': state.isFocused ? '#ffefd4' : 'white',
+      textAlign: 'left',
+      padding: '1rem',
+      fontSize: '1.2rem',
+    }),
+    menu: (provided, state) => ({
+      ...provided,
+      backgroundColor: theme === 'dark' ?  '#2a323c': '#FCF6EC',
+      color: theme === 'dark' ? 'white' : 'black', // Change the text color based on the theme
+
+    }),
+    input: (base) => ({
+      ...base,
+      color: theme === 'dark' ? 'white': 'black', // Change the color of the input text here
+    }),
+    singleValue:(base) => ({
+      ...base,
+      color: theme === 'dark' ? 'white': 'black', // Change the color of the input text here
+    }),
+  };
+
+  const { Option } = components;
+  const IconOption = props => (
+    <Option {...props}>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <img
+        src={props.data.icon}
+        style={{ width: 36, marginRight: 10}}
+        alt={props.data.label}
+      />
+      {props.data.label}
+      </div>
+    </Option>
+  );
+
 
   return (
     <div className="App">
@@ -37,7 +118,7 @@ function App() {
         </label>
       </header>
 
-<div className="container">
+    <div className="container">
       <AnimatePresence>
         <AnimatedTextCharacter
           key="text"
@@ -50,17 +131,29 @@ function App() {
           />
         )}
         {showTextInput && (
-        <motion.input
-        type="text"
-        placeholder="Enter the country name..."
-        className="main_input text-2xl mt-[4vh] z-index-3 border-black input  w-1/2 p-10 text-xl"
+        <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-      />
+      >
+<div style={{ display: 'flex', alignItems: 'center' }}>
+  <Select
+    searchable
+    options={options}
+    onChange={(selectedOption) => {
+      console.log('Selected:', selectedOption);
+    }}
+    styles={selectStyles}
+    components={{ Option: IconOption }}
+  />
+
+  <button className={`ml-1 rounded-r-lg mt-[4vh] text-lg h-[8vh] w-[7vw] border border-gray-500 ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'} ${theme === 'dark' ? 'text-white' : 'text-black'} ${theme === 'dark' ? 'hover:border-white' : 'hover:border-black'}`}>Search</button>
+</div>
+        </motion.div>
+      
+      
         )}
       </AnimatePresence>
-
     </div>
     <footer className="footer items-center p-4 bg-neutral text-neutral-content">
   <aside className="items-center grid-flow-col">

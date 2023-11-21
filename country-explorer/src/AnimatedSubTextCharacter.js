@@ -8,7 +8,7 @@ const AnimatedSubTextCharacter = ({ text }) => {
     hidden: { opacity: 0 },
     visible: (i = 1) => ({
       opacity: 1,
-      transition: { staggerChildren: 0.012, delayChildren: 0.02 * i} // Add a delay of 1 second},
+      transition: { staggerChildren: 0.008, delayChildren: 0.02 * i} // Add a delay of 1 second},
     }),
   };
 

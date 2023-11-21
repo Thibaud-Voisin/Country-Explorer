@@ -7,6 +7,7 @@
 @import 'tailwindcss/utilities';
 
 
+
 .container {
   max-width: 100%;
   text-align: center;
@@ -45,13 +46,13 @@
   font-family: 'Comfortaa', sans-serif;
   font-size: 30px;
   margin-top : 4.5vh;
-  font-weight: bold;
   color: snow;
 }
 
 [data-theme="dark"] {
   .App {
-    background-color: #060224;
+    background: linear-gradient(140deg, rgba(6,2,36,1) 0%, rgba(4,4,54,1) 100%);
+
     min-height: 100vh;
   }
 
@@ -66,7 +67,7 @@
 
 [data-theme="cupcake"] {
   .App{
-    background-color: #FFF2D8;
+    background: linear-gradient(320deg, rgba(250,230,189,1) 0%, rgba(254,251,247,1) 100%);
     min-height: 100vh;
   }
   .main_input{
