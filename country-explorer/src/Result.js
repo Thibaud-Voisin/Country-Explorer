@@ -1,23 +1,55 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEarthAmericas } from '@fortawesome/free-solid-svg-icons';
+import { faEarthAmericas, faLanguage, faCity, faCoins, faPeopleGroup, faScaleUnbalancedFlip, faMountain } from '@fortawesome/free-solid-svg-icons';
 
-const Result = ({ theme, isCountryRetrieved }) => {
+const Result = ({ theme, isCountryRetrieved, Country_Data }) => {
+
+  Country_Data = {
+    'Images':["https://www.welcometofrance.com/app/uploads/2019/12/alexander-kagan-t9Td0zfDTwI-unsplash-1920x1280.jpg", "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2.jpg?", "https://www.welcometofrance.com/app/uploads/2019/12/alexander-kagan-t9Td0zfDTwI-unsplash-1920x1280.jpg", "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2.jpg?"],
+    'Name':"France",
+    'Sub_Name':"Republique francaise",
+    'Flag':"https://flagcdn.com/w320/aw.png",
+    'Arms':"https://mainfacts.com/media/images/coats_of_arms/si.png",
+    'Continent':"Europe",
+    'Capital':"Paris",
+    'Languages':["Francis"],
+    'Currencies':["Euro"],
+    'Population':67321454,
+    'Population_AVG': 32432,
+    'Superficy':344523,
+    'Superficy_AVG':34,
+    'Gini' : 0.123,
+    'Gini_AVG' : 0.65
+  }
+
+
+  const {
+    Images,
+    Name,
+    Sub_Name,
+    Flag,
+    Arms,
+    Continent,
+    Capital,
+    Languages,
+    Currencies,
+    Population,
+    Population_AVG,
+    Superficy,
+    Superficy_AVG,
+    Gini,
+    Gini_AVG,
+  } = Country_Data;
+  
+
   const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
-  const svgRef = useRef();
-  const [showButton, setShowButton] = useState(false);
-  const [is_gini, setIs_gini] = useState(false);
 
   useEffect(() => {
     if (isCountryRetrieved) {
       scrollToBottom();
-      window.addEventListener('scroll', handleScroll);
-
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
     }
+    
   }, [isCountryRetrieved]);
 
 
@@ -35,28 +67,7 @@ const Result = ({ theme, isCountryRetrieved }) => {
 
     setTimeout(() => {
       scrollTo();
-      setShowButton(true);
     }, 100);
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-    setShowButton(false);
-  };
-
-  const handleScroll = () => {
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.body.scrollHeight;
-    const scrollTop = window.scrollY;
-
-    if (scrollTop === documentHeight - windowHeight) {
-      setShowButton(true);
-    } else {
-      setShowButton(false);
-    }
   };
 
   return isCountryRetrieved ? (
@@ -68,137 +79,140 @@ transition={{ duration: 0.5 }}
 >
 <div>
     <div className='ml-[2vw] sub_title_results'>
-        <div className="-mt-[9vh] flex items-center title">
-            France 
-            <img className='w-[3vw] ml-[1vw]' src={"https://flagcdn.com/w320/aw.png"} alt='flag'/>  
-            <img className='w-[3vw] ml-[1vw]' src={"https://mainfacts.com/media/images/coats_of_arms/si.png"} alt='arms'/> 
+        <div className="flex items-center title">
+            {Name}
+            <img className='w-[4vw] ml-[1vw]' src={Flag} alt='flag'/>  
+            <img className='w-[3vw] ml-[1vw]' src={Arms} alt='arms'/> 
         </div>
-        <div className='-mt-[3vh]'>
-            Aruba
+        <div className='-mt-[2vw]'>
+            {Sub_Name}
         </div>
     </div>
     <div className="flex items-center">
-        <div className={`mt-[2vh] flex mr-[2vw] ml-[2.5vw] h-[50vh] ${is_gini ? 'w-[70vw]': 'w-[57.5vw]'}`}>
+        <div className="mt-[2vh] flex mr-[2vw] ml-[2.5vw] h-[50vh] w-[57.5vw]">
         <div className="carousel rounded-2xl w-full">
   <div id="slide1" className="carousel-item relative w-full">
-    <img src="https://images.unsplash.com/photo-1642231630455-f32a2e7afac0?ixid=M3w1MzI1NTZ8MHwxfHNlYXJjaHwxfHxVVEMtMDQlM0EwMHxlbnwwfHx8fDE3MDA4NTA5Nzh8MA&ixlib=rb-4.0.3" className="inset-0 w-full h-full object-cover" />
+    <img src={Images[0]} className="inset-0 w-full h-full object-cover" />
     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
       <a href="#slide4" className="btn btn-circle">❮</a> 
       <a href="#slide2" className="btn btn-circle">❯</a>
     </div>
   </div> 
   <div id="slide2" className="carousel-item relative w-full">
-  <img src="https://images.unsplash.com/photo-1642231630455-f32a2e7afac0?ixid=M3w1MzI1NTZ8MHwxfHNlYXJjaHwxfHxVVEMtMDQlM0EwMHxlbnwwfHx8fDE3MDA4NTA5Nzh8MA&ixlib=rb-4.0.3" className="inset-0 w-full h-full object-cover" />
+  <img src={Images[1]} className="inset-0 w-full h-full object-cover" />
     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
       <a href="#slide1" className="btn btn-circle">❮</a> 
       <a href="#slide3" className="btn btn-circle">❯</a>
     </div>
   </div> 
   <div id="slide3" className="carousel-item relative w-full">
-  <img src="https://images.unsplash.com/photo-1642231630455-f32a2e7afac0?ixid=M3w1MzI1NTZ8MHwxfHNlYXJjaHwxfHxVVEMtMDQlM0EwMHxlbnwwfHx8fDE3MDA4NTA5Nzh8MA&ixlib=rb-4.0.3" className="inset-0 w-full h-full object-cover" />
+  <img src={Images[2]} className="inset-0 w-full h-full object-cover" />
     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
       <a href="#slide2" className="btn btn-circle">❮</a> 
       <a href="#slide4" className="btn btn-circle">❯</a>
     </div>
   </div> 
   <div id="slide4" className="carousel-item relative w-full">
-  <img src="https://images.unsplash.com/photo-1642231630455-f32a2e7afac0?ixid=M3w1MzI1NTZ8MHwxfHNlYXJjaHwxfHxVVEMtMDQlM0EwMHxlbnwwfHx8fDE3MDA4NTA5Nzh8MA&ixlib=rb-4.0.3" className="inset-0 w-full h-full object-cover" />
+  <img src={Images[3]} className="inset-0 w-full h-full object-cover" />
     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
       <a href="#slide3" className="btn btn-circle">❮</a> 
       <a href="#slide1" className="btn btn-circle">❯</a>
     </div>
   </div>
+
 </div>
     </div>
-    <div className={`card card-compact shadow-xl bg-base-100 ${is_gini ? 'w-[300vw]' : 'w-[37.5vw]'} h-[50vh] mt-[2vh] mr-[2.5vw]`}>
+    <div className="card card-compact shadow-xl bg-base-100 w-[37.5vw] h-[50vh] mt-[2vh] mr-[2.5vw]">
     <figure>
         <iframe
             title='Country Map'
             loading="lazy"
             className='h-[100vh] w-[100vw]'
-            allowfullscreen
-            referrerpolicy="no-referrer-when-downgrade"
-            src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=france&maptype=satellite`}>
+            allowFullScreen
+            referrerPolicy="no-referrer-when-downgrade"
+            src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${Name}&maptype=satellite`}>
         </iframe>
     </figure>
     <div className="card-body">
-        <div class="flex items-center justify-between">
-            <h3 class="card-title">XXXXX's Map</h3>
-            <div class="flex items-center">
-                <button class="btn btn-primary">Expand</button>
+        <div className="flex items-center justify-between">
+            <h3 className="card-title">{Name}'s Map</h3>
+            <div className="flex items-center">
+                <button className="btn btn-primary" onClick={()=>document.getElementById('my_modal_1').showModal()}>Expand</button>
             </div>
         </div>
     </div>
 </div>
+<dialog id="my_modal_1" className="modal mb-[5vh]">
+  <div className="modal-box max-w-[80vw] h-[80vh] flex items-center justify-between p-10">
+  <iframe
+            title='Country Map'
+            loading="lazy"
+            className='h-full w-full'
+            allowFullScreen
+            referrerPolicy="no-referrer-when-downgrade"
+            src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${Name}&maptype=satellite`}>
+        </iframe>
+    <div className="modal-action">
+      <form method="dialog">
+      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+    </div>
+  </div>
+</dialog>
 </div>
 <div className="stats w-[95vw] shadow m-[2.5vw]">
 <div className="stat">
 <div className="stat-figure text-secondary">
 <FontAwesomeIcon icon={faEarthAmericas} size="2x"/> 
 </div>
-        <div className="stat-title">New Registers</div>
-        <div className="stat-value">1,200</div>
-        <div className="stat-desc">↘︎ 90 (14%)</div>
+        <div className="stat-title">Continent</div>
+        <div className="stat-value">{Continent}</div>
     </div>
     <div className="stat">
         <div className="stat-figure text-secondary">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
-            </svg>
+        <FontAwesomeIcon icon={faCity} size="2x"/> 
         </div>
-        <div className="stat-title">New Users</div>
-        <div className="stat-value">4,200</div>
-        <div className="stat-desc">↗︎ 400 (22%)</div>
+        <div className="stat-title">Capital city</div>
+        <div className="stat-value">{Capital}</div>
     </div>
     <div className="stat">
         <div className="stat-figure text-secondary">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
-            </svg>
+        <FontAwesomeIcon icon={faLanguage} size="2x"/> 
         </div>
-        <div className="stat-title">New Registers</div>
-        <div className="stat-value">1,200</div>
-        <div className="stat-desc">↘︎ 90 (14%)</div>
+        <div className="stat-title">Languages</div>
+        <div className="stat-value">{Languages}</div>
     </div>
     <div className="stat">
         <div className="stat-figure text-secondary">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
-            </svg>
+        <FontAwesomeIcon icon={faCoins} size="2x"/> 
+
         </div>
-        <div className="stat-title">New Registers</div>
-        <div className="stat-value">1,200</div>
-        <div className="stat-desc">↘︎ 90 (14%)</div>
+        <div className="stat-title">Currencies</div>
+        <div className="stat-value">{Currencies}</div>
     </div>
     <div className="stat">
         <div className="stat-figure text-secondary">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
-            </svg>
+        <FontAwesomeIcon icon={faPeopleGroup } size="2x"/> 
         </div>
-        <div className="stat-title">New Registers</div>
-        <div className="stat-value">1,200</div>
-        <div className="stat-desc">↘︎ 90 (14%)</div>
+        <div className="stat-title">Population</div>
+        <div className="stat-value">{Population}</div>
+        <div className="stat-desc">{(Population > Population_AVG) ? '↗' : '↘︎'} - Average: {Population_AVG}</div>
     </div>
     <div className="stat">
         <div className="stat-figure text-secondary">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
-            </svg>
+        <FontAwesomeIcon icon={faMountain } size="2x"/> 
         </div>
-        <div className="stat-title">New Registers</div>
-        <div className="stat-value">1,200</div>
-        <div className="stat-desc">↘︎ 90 (14%)</div>
+        <div className="stat-title">Superficy</div>
+        <div className="stat-value">{Superficy}</div>
+        <div className="stat-desc">{(Superficy > Superficy_AVG) ? '↗' : '↘︎'} - Average: {Superficy_AVG}</div>
     </div>
     <div className="stat">
         <div className="stat-figure text-secondary">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
-            </svg>
+        <FontAwesomeIcon icon={faScaleUnbalancedFlip} size="2x"/> 
         </div>
-        <div className="stat-title">New Registers</div>
-        <div className="stat-value">1,200</div>
-        <div className="stat-desc">↘︎ 90 (14%)</div>
+        <div className="stat-title">Inequality level</div>
+        <div className="stat-value">{Gini}</div>
+        <div className="stat-desc">{(Gini > Gini_AVG) ? '↗' : '↘︎'} - Average: {Gini_AVG}</div>
     </div>
 </div>
 </div>

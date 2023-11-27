@@ -9,6 +9,7 @@ import Result from './Result';
 
 const MainContent = ({ theme, options, API_URL }) => {
 
+  let Country_Data;
   const texts = [
     'COUNTRY EXPLORER',
     'EXPLORADOR DE PAÍSES',
@@ -44,11 +45,10 @@ const MainContent = ({ theme, options, API_URL }) => {
           throw new Error('Failed to fetch country information');
         }
     
-        const data = await response.json();
-        console.log('Country information:', data);
+        Country_Data = await response.json();
         setIsCountryRetrieved(true);
     
-        return data;
+        return Country_Data;
       } catch (error) {
         console.error('Error fetching country information:', error);
         return null;
@@ -173,7 +173,7 @@ const MainContent = ({ theme, options, API_URL }) => {
       </AnimatePresence>
     </div>
     
-    <Result theme={theme} isCountryRetrieved={isCountryRetrieved}/>
+    <Result theme={theme} isCountryRetrieved={isCountryRetrieved} Country_Data={Country_Data}/>
     </div>
   );
 };
