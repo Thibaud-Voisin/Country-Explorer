@@ -3,20 +3,7 @@ import {React, useState, useEffect}  from 'react';
 
 const Carousel = ({ Images, isCountryRetrieved }) => {
     const [currentImg, setCurrentImg] = useState(1);
-    const [count, setCount] = useState(0);
-    
-    useEffect(() => {
-      if (isCountryRetrieved) {
-        const interval = setInterval(() => {
-          setCount(prevCount => prevCount + 1);
-          const nextImg = (currentImg % 4) + 1;
-          goToSlide('#slide' + nextImg);
-        }, 4000);
-    
-        return () => clearInterval(interval);
-      }
-    }, [currentImg, isCountryRetrieved]);
-    
+
     function goToSlide(slideId) {
       const slideElement = document.querySelector(slideId);
       if (slideElement) {

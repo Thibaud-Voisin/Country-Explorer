@@ -23,7 +23,7 @@ const Stats = ({Name, Continent, Capital, Languages, Currencies, Population, Pop
             <FontAwesomeIcon icon={faEarthAmericas} size="2x"/>
         </div>
         <div className="stat-title">Continent</div>
-        <div className="stat-value">{Continent}</div>
+        <div className="stat-value text-2xl">{Continent}</div>
     </div>
     )}
     {Capital && (
@@ -32,7 +32,7 @@ const Stats = ({Name, Continent, Capital, Languages, Currencies, Population, Pop
             <FontAwesomeIcon icon={faCity} size="2x"/>
         </div>
         <div className="stat-title">Capital city</div>
-        <div className="stat-value">{Capital}</div>
+        <div className="stat-value text-2xl">{Capital}</div>
     </div>
     )}
     {Languages && Languages.length > 0 && (
@@ -41,7 +41,7 @@ const Stats = ({Name, Continent, Capital, Languages, Currencies, Population, Pop
             <FontAwesomeIcon icon={faLanguage} size="2x" />
         </div>
         <div className="stat-title">{Languages.length === 1 ? 'Language:' : 'Languages:'}</div>
-        <div className="stat-value">
+        <div className="stat-value text-2xl">
             <div>
                 {Languages.slice(0, 2).map((language, index) => (
                 <span key={index}>
@@ -88,7 +88,7 @@ const Stats = ({Name, Continent, Capital, Languages, Currencies, Population, Pop
             <FontAwesomeIcon icon={faCoins} size="2x"/>
         </div>
         <div className="stat-title">{Currencies.length === 1 ? 'Currency:' : 'Currencies:'}</div>
-        <div className="stat-value">
+        <div className="stat-value text-2xl">
             <div>
                 {Currencies.slice(0, 2).map((Currency, index) => (
                 <span key={index}>
@@ -135,7 +135,7 @@ const Stats = ({Name, Continent, Capital, Languages, Currencies, Population, Pop
             <FontAwesomeIcon icon={faPeopleGroup } size="2x"/>
         </div>
         <div className="stat-title">Population</div>
-        <div className="stat-value">{formatNumber(Population)}</div>
+        <div className="stat-value text-2xl">{formatNumber(Population)}</div>
         <div className="stat-desc">{(Population > Population_AVG) ? '↗' : '↘︎'} - Average: {formatNumber(Population_AVG)}</div>
     </div>
     )}
@@ -145,7 +145,7 @@ const Stats = ({Name, Continent, Capital, Languages, Currencies, Population, Pop
             <FontAwesomeIcon icon={faRuler } size="2x"/>
         </div>
         <div className="stat-title">Superficy</div>
-        <div className="stat-value">{formatNumber(Superficy)} km²</div>
+        <div className="stat-value text-2xl">{formatNumber(Superficy)} km²</div>
         <div className="stat-desc">{(Superficy > Superficy_AVG) ? '↗' : '↘︎'} - Average: {formatNumber(Superficy_AVG)}</div>
     </div>
     )}
@@ -155,7 +155,7 @@ const Stats = ({Name, Continent, Capital, Languages, Currencies, Population, Pop
             <FontAwesomeIcon icon={faScaleUnbalancedFlip} size="2x"/>
         </div>
         <div className="stat-title">Inequality level</div>
-        <div className="stat-value">{formatNumber(Gini)}</div>
+        <div className="stat-value text-2xl">{formatNumber(Gini)}</div>
         <div className="stat-desc">{(Gini > Gini_AVG) ? '↗' : '↘︎'} - Average: {formatNumber(Gini_AVG)}</div>
     </div>
     )}

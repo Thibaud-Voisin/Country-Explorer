@@ -5,7 +5,7 @@ import Carousel from './Result/Carousel';
 import Interactive_Map from './Result/Interactive_Map';
 import Stats from './Result/Stats';
 
-const Result = ({ theme, isCountryRetrieved, Country_Data }) => {
+const Result = ({ new_search, setnew_search, isCountryRetrieved, Country_Data }) => {
 
   Country_Data = {
     'Images':["https://www.welcometofrance.com/app/uploads/2019/12/alexander-kagan-t9Td0zfDTwI-unsplash-1920x1280.jpg", "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2.jpg?", "https://www.welcometofrance.com/app/uploads/2019/12/alexander-kagan-t9Td0zfDTwI-unsplash-1920x1280.jpg", "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2.jpg?"],
@@ -45,11 +45,13 @@ const Result = ({ theme, isCountryRetrieved, Country_Data }) => {
 
 
   useEffect(() => {
-    if (isCountryRetrieved) {
+    if (new_search) {
+      console.log("new search");
       scrollToBottom();
+      setnew_search(false);
     }
     
-  }, [isCountryRetrieved]);
+  }, [new_search]);
 
 
   const scrollToBottom = () => {

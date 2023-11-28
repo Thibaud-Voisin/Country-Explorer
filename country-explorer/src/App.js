@@ -46,7 +46,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header toggle_theme={toggleTheme} isVisibleAlert={isVisibleAlert}/>
+      <Header theme={theme} toggle_theme={toggleTheme} isVisibleAlert={isVisibleAlert}/>
       <MainContent theme={theme} options={options} API_URL={API_URL}/>
       <Footer />
     </div>

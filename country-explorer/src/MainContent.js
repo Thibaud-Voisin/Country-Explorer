@@ -25,6 +25,7 @@ const MainContent = ({ theme, options, API_URL }) => {
   const [showTextInput, setshowTextInput] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(null); // State to hold the selected country
   const [isCountryRetrieved, setIsCountryRetrieved] = useState(false);
+  const [new_search, setnew_search] = useState(false);
 
   const get_selected_country = async () => {
     if (selectedCountry && selectedCountry.label)
@@ -48,6 +49,7 @@ const MainContent = ({ theme, options, API_URL }) => {
     
         Country_Data = await response.json();
         setIsCountryRetrieved(true);
+        setnew_search(true);
     
         return Country_Data;
       } catch (error) {
@@ -175,7 +177,7 @@ const MainContent = ({ theme, options, API_URL }) => {
       </AnimatePresence>
     </div>
     
-    <Result theme={theme} isCountryRetrieved={isCountryRetrieved} Country_Data={Country_Data}/>
+    <Result new_search={new_search} setnew_search={setnew_search} isCountryRetrieved={isCountryRetrieved} Country_Data={Country_Data}/>
     </div>
   );
 };
