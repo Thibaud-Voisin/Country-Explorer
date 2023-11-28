@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEarthAmericas, faLanguage, faCity, faCoins, faPeopleGroup, faScaleUnbalancedFlip, faRuler } from '@fortawesome/free-solid-svg-icons';
 
 
-const Stats = ({Name, Continent, Capital, Languages, Currencies, Population, Population_AVG, Superficy, Superficy_AVG, Gini, Gini_AVG }) => {
+const Stats = ({name, continent, capital, languages, currencies, population, populationAvg, superficy, superficyAvg, gini, giniAvg }) => {
 
     function formatNumber(num) {
         if (num === 0) return num;
@@ -17,42 +17,42 @@ const Stats = ({Name, Continent, Capital, Languages, Currencies, Population, Pop
 
     return (
 <div className="stats shadow w-full">
-    {Continent && (
+    {continent && (
     <div className="stat">
         <div className="stat-figure text-secondary">
             <FontAwesomeIcon icon={faEarthAmericas} size="2x"/>
         </div>
         <div className="stat-title">Continent</div>
-        <div className="stat-value text-2xl">{Continent}</div>
+        <div className="stat-value text-2xl">{continent}</div>
     </div>
     )}
-    {Capital && (
+    {capital && (
     <div className="stat">
         <div className="stat-figure text-secondary">
             <FontAwesomeIcon icon={faCity} size="2x"/>
         </div>
         <div className="stat-title">Capital city</div>
-        <div className="stat-value text-2xl">{Capital}</div>
+        <div className="stat-value text-2xl">{capital}</div>
     </div>
     )}
-    {Languages && Languages.length > 0 && (
+    {languages && languages.length > 0 && (
     <div className="stat">
         <div className="stat-figure text-secondary">
             <FontAwesomeIcon icon={faLanguage} size="2x" />
         </div>
-        <div className="stat-title">{Languages.length === 1 ? 'Language:' : 'Languages:'}</div>
+        <div className="stat-title">{languages.length === 1 ? 'Language:' : 'Languages:'}</div>
         <div className="stat-value text-2xl">
             <div>
-                {Languages.slice(0, 2).map((language, index) => (
+                {languages.slice(0, 2).map((language, index) => (
                 <span key={index}>
                 {language}
-                {index !== Languages.slice(0, 2).length - 1 && ', '}
+                {index !== languages.slice(0, 2).length - 1 && ', '}
                 </span>
                 ))}
             </div>
         </div>
         <div className="stat-desc">
-            {Languages.length > 2 && (
+            {languages.length > 2 && (
             <div>
                 <button onClick={()=>document.getElementById('Pop_Up_Language').showModal()} className="underline hover:text-white">
                 Show All
@@ -64,11 +64,11 @@ const Stats = ({Name, Continent, Capital, Languages, Currencies, Population, Pop
     )}
     <dialog id="Pop_Up_Language" className="modal border-none">
         <div className="modal-box">
-            <h3 className="font-bold text-lg">{Name}'s Languages</h3>
-            <p className="py-4">{Languages.map((language, index) => (
+            <h3 className="font-bold text-lg">{name}'s Languages</h3>
+            <p className="py-4">{languages.map((language, index) => (
                 <span key={index}>
                 {language}
-                {index !== Languages.length - 1 && ', '}
+                {index !== languages.length - 1 && ', '}
                 </span>
                 ))}
             </p>
@@ -82,24 +82,24 @@ const Stats = ({Name, Continent, Capital, Languages, Currencies, Population, Pop
             <button>close</button>
         </form>
     </dialog>
-    {Currencies && Currencies.length > 0 && (
+    {currencies && currencies.length > 0 && (
     <div className="stat">
         <div className="stat-figure text-secondary">
             <FontAwesomeIcon icon={faCoins} size="2x"/>
         </div>
-        <div className="stat-title">{Currencies.length === 1 ? 'Currency:' : 'Currencies:'}</div>
+        <div className="stat-title">{currencies.length === 1 ? 'Currency:' : 'Currencies:'}</div>
         <div className="stat-value text-2xl">
             <div>
-                {Currencies.slice(0, 2).map((Currency, index) => (
+                {currencies.slice(0, 2).map((Currency, index) => (
                 <span key={index}>
                 {Currency}
-                {index !== Currencies.slice(0, 2).length - 1 && ', '}
+                {index !== currencies.slice(0, 2).length - 1 && ', '}
                 </span>
                 ))}
             </div>
         </div>
         <div className="stat-desc">
-            {Currencies.length > 2 && (
+            {currencies.length > 2 && (
             <div>
                 <button onClick={()=>document.getElementById('Pop_Up_Currency').showModal()} className="underline hover:text-white">
                 Show All
@@ -111,11 +111,11 @@ const Stats = ({Name, Continent, Capital, Languages, Currencies, Population, Pop
         )}
     <dialog id="Pop_Up_Currency" className="modal border-none">
         <div className="modal-box">
-            <h3 className="font-bold text-lg">{Name}'s Currencies</h3>
-            <p className="py-4">{Currencies.map((Currency, index) => (
+            <h3 className="font-bold text-lg">{name}'s Currencies</h3>
+            <p className="py-4">{currencies.map((Currency, index) => (
                 <span key={index}>
                 {Currency}
-                {index !== Currencies.length - 1 && ', '}
+                {index !== currencies.length - 1 && ', '}
                 </span>
                 ))}
             </p>
@@ -129,36 +129,38 @@ const Stats = ({Name, Continent, Capital, Languages, Currencies, Population, Pop
             <button>close</button>
         </form>
     </dialog>
-    {Population && Population_AVG && Population > 0 && Population_AVG > 0 && (
-    <div className="stat">
-        <div className="stat-figure text-secondary">
-            <FontAwesomeIcon icon={faPeopleGroup } size="2x"/>
-        </div>
-        <div className="stat-title">Population</div>
-        <div className="stat-value text-2xl">{formatNumber(Population)}</div>
-        <div className="stat-desc">{(Population > Population_AVG) ? '↗' : '↘︎'} - Average: {formatNumber(Population_AVG)}</div>
+    {typeof population !== 'undefined' && typeof populationAvg !== 'undefined' && population > 0 && populationAvg > 0 && (
+  <div className="stat">
+    <div className="stat-figure text-secondary">
+      <FontAwesomeIcon icon={faPeopleGroup} size="2x"/>
     </div>
-    )}
-    {Superficy && Superficy_AVG && Superficy > 0 && Superficy_AVG > 0 && (
-    <div className="stat">
-        <div className="stat-figure text-secondary">
-            <FontAwesomeIcon icon={faRuler } size="2x"/>
-        </div>
-        <div className="stat-title">Superficy</div>
-        <div className="stat-value text-2xl">{formatNumber(Superficy)} km²</div>
-        <div className="stat-desc">{(Superficy > Superficy_AVG) ? '↗' : '↘︎'} - Average: {formatNumber(Superficy_AVG)}</div>
+    <div className="stat-title">Population</div>
+    <div className="stat-value text-2xl">{formatNumber(population)}</div>
+    <div className="stat-desc">{(population > populationAvg) ? '↗' : '↘︎'} - Average: {formatNumber(populationAvg)}</div>
+  </div>
+)}
+
+{typeof superficy !== 'undefined' && typeof superficyAvg !== 'undefined' && superficy > 0 && superficyAvg > 0 && (
+  <div className="stat">
+    <div className="stat-figure text-secondary">
+      <FontAwesomeIcon icon={faRuler} size="2x"/>
     </div>
-    )}
-    {Gini && Gini_AVG && Gini > 0 && Gini_AVG > 0 && (
-    <div className="stat">
-        <div className="stat-figure text-secondary">
-            <FontAwesomeIcon icon={faScaleUnbalancedFlip} size="2x"/>
-        </div>
-        <div className="stat-title">Inequality level</div>
-        <div className="stat-value text-2xl">{formatNumber(Gini)}</div>
-        <div className="stat-desc">{(Gini > Gini_AVG) ? '↗' : '↘︎'} - Average: {formatNumber(Gini_AVG)}</div>
+    <div className="stat-title">Superficy</div>
+    <div className="stat-value text-2xl">{formatNumber(superficy)} km²</div>
+    <div className="stat-desc">{(superficy > superficyAvg) ? '↗' : '↘︎'} - Average: {formatNumber(superficyAvg)}</div>
+  </div>
+)}
+
+{typeof gini !== 'undefined' && typeof giniAvg !== 'undefined' && gini > 0 && giniAvg > 0 && (
+  <div className="stat">
+    <div className="stat-figure text-secondary">
+      <FontAwesomeIcon icon={faScaleUnbalancedFlip} size="2x"/>
     </div>
-    )}
+    <div className="stat-title">Inequality level</div>
+    <div className="stat-value text-2xl">{formatNumber(gini)}</div>
+    <div className="stat-desc">{(gini > giniAvg) ? '↗' : '↘︎'} - Average: {formatNumber(giniAvg)}</div>
+  </div>
+)}
 </div>
 )};
 

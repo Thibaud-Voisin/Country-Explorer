@@ -11,7 +11,6 @@ import  ReactPageScroll  from  'react-page-scroll';
 
 const MainContent = ({ theme, options, API_URL }) => {
   
-  let Country_Data;
   const texts = [
     'COUNTRY EXPLORER',
     'EXPLORADOR DE PAÍSES',
@@ -26,6 +25,23 @@ const MainContent = ({ theme, options, API_URL }) => {
   const [selectedCountry, setSelectedCountry] = useState(null); // State to hold the selected country
   const [isCountryRetrieved, setIsCountryRetrieved] = useState(false);
   const [new_search, setnew_search] = useState(false);
+  const [Country_Data, setCountry_Data] = useState({
+    Images: [],
+    Name: '',
+    Sub_Name: '',
+    Flag: '',
+    Arms: '',
+    Continent: '',
+    Capital: '',
+    Languages: [],
+    Currencies: [],
+    Population: '',
+    Population_AVG: '',
+    Superficy: '',
+    Superficy_AVG: '',
+    Gini: '',
+    Gini_AVG: '',
+  });
 
   const get_selected_country = async () => {
     if (selectedCountry && selectedCountry.label)
@@ -47,7 +63,8 @@ const MainContent = ({ theme, options, API_URL }) => {
           throw new Error('Failed to fetch country information');
         }
     
-        Country_Data = await response.json();
+        setCountry_Data(await response.json());
+        console.log(Country_Data);
         setIsCountryRetrieved(true);
         setnew_search(true);
     

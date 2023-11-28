@@ -1,15 +1,15 @@
 import React from 'react';
 
-const Title = ({ Name, Flag, Arms, Sub_Name }) => {
+const Title = ({ name, flag, arms, subName }) => {
   return (
     <div className='ml-[2vw] sub_title_results'>
       <div className="flex items-center title">
-        {Name}
-        <img className='w-[4vw] ml-[1vw]' src={Flag} alt='flag'/>  
-        <img className='w-[3vw] ml-[1vw]' src={Arms} alt='arms'/> 
+        {name}
+        <img className='w-[4vw] ml-[1vw]' src={flag} alt='flag'/>  
+        <img className='w-[3vw] ml-[1vw]' src={arms} alt='arms'/> 
       </div>
-      <div className='-mt-[2vw]'>
-        {Sub_Name}
+      <div className='-mt-[1vw]'>
+        {subName}
       </div>
     </div>
   );

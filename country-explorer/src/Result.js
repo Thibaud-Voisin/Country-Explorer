@@ -7,40 +7,23 @@ import Stats from './Result/Stats';
 
 const Result = ({ new_search, setnew_search, isCountryRetrieved, Country_Data }) => {
 
-  Country_Data = {
-    'Images':["https://www.welcometofrance.com/app/uploads/2019/12/alexander-kagan-t9Td0zfDTwI-unsplash-1920x1280.jpg", "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2.jpg?", "https://www.welcometofrance.com/app/uploads/2019/12/alexander-kagan-t9Td0zfDTwI-unsplash-1920x1280.jpg", "https://www.lonelyplanet.fr/sites/lonelyplanet/files/styles/manual_crop/public/media/destination/slider/mobile/paris2.jpg?"],
-    'Name':"France",
-    'Sub_Name':"Republique francaise",
-    'Flag':"https://flagcdn.com/w320/aw.png",
-    'Arms':"https://mainfacts.com/media/images/coats_of_arms/si.png",
-    'Continent':"Europe",
-    'Capital':"Paris",
-    'Languages':["Francis", "English", "Spanish"],
-    'Currencies':["Euro", "Dollar",   "Pound"],
-    'Population':67321454,
-    'Population_AVG': 32432,
-    'Superficy':344523,
-    'Superficy_AVG':34,
-    'Gini' : 0.123,
-    'Gini_AVG' : 0.65
-  }
 
   const {
-    Images,
-    Name,
-    Sub_Name,
-    Flag,
-    Arms,
-    Continent,
-    Capital,
-    Languages,
-    Currencies,
-    Population,
-    Population_AVG,
-    Superficy,
-    Superficy_AVG,
-    Gini,
-    Gini_AVG,
+    images,
+    name,
+    subName,
+    flag,
+    arms,
+    continent,
+    capital,
+    languages,
+    currencies,
+    population,
+    populationAvg,
+    superficy,
+    superficyAvg,
+    gini,
+    giniAvg,
   } = Country_Data;
 
 
@@ -73,24 +56,37 @@ const Result = ({ new_search, setnew_search, isCountryRetrieved, Country_Data })
 
   return isCountryRetrieved ? (
     <motion.div
-    className='result w-[100vw] h-[100vh] relative'
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 0.5 }}
+      className='result w-[100vw] h-[100vh] relative'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
     >
-      <Title Name={Name} Flag={Flag} Arms={Arms} Sub_Name={Sub_Name}/>
-      <div className="grid grid-cols-5 gap-8 p-10 mb-10">
+      <Title name={name} flag={flag} arms={arms} subName={subName}/>
+      <div className="grid grid-cols-5 gap-8 p-8 mb-10">
         <div className="h-[55vh] col-span-3 w-full">
-        <Carousel Images={Images} isCountryRetrieved={isCountryRetrieved}/>
+          <Carousel images={images} isCountryRetrieved={isCountryRetrieved}/>
         </div>
         <div className="col-span-2 w-full">
-        <Interactive_Map Name={Name}/>
+          <Interactive_Map name={name}/>
         </div>
         <div className="col-span-5 w-full">
-        <Stats Name={Name} Continent={Continent} Capital={Capital} Languages={Languages} Currencies={Currencies} Population={Population} Population_AVG={Population_AVG} Superficy={Superficy} Superficy_AVG={Superficy_AVG} Gini={Gini} Gini_AVG={Gini_AVG}/>
-      </div>
+          <Stats
+            name={name}
+            continent={continent}
+            capital={capital}
+            languages={languages}
+            currencies={currencies}
+            population={population}
+            populationAvg={populationAvg}
+            superficy={superficy}
+            superficyAvg={superficyAvg}
+            gini={gini}
+            giniAvg={giniAvg}
+          />
+        </div>
       </div>
     </motion.div>
-) : null;
+  ) : null;
 };
+
 export default Result;
