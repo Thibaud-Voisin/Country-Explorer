@@ -99,6 +99,9 @@
 }
 
 [data-theme="cupcake"] {
+  .sub_title_results {
+    color: #000505;
+  }
   .App{
     background: linear-gradient(320deg, rgba(250,230,189,1) 0%, rgba(254,251,247,1) 100%);
   }

@@ -6,9 +6,11 @@ import Select, { components } from 'react-select';
 import AnimatedSubTextCharacter from './AnimatedSubTextCharacter';
 import { motion, AnimatePresence } from 'framer-motion';
 import Result from './Result';
+import  ReactPageScroll  from  'react-page-scroll';
+
 
 const MainContent = ({ theme, options, API_URL }) => {
-
+  
   let Country_Data;
   const texts = [
     'COUNTRY EXPLORER',
@@ -18,7 +20,6 @@ const MainContent = ({ theme, options, API_URL }) => {
     'LÄNDERFORSCHER ',
     'EXPLORATEUR DE PAYS',
   ];
-
 
   const [index, setIndex] = useState(0);
   const [showTextInput, setshowTextInput] = useState(false);
@@ -130,6 +131,7 @@ const MainContent = ({ theme, options, API_URL }) => {
   }, [texts.length, theme]);
 
   return (
+    
     <div>
     <div className="container">
       <AnimatePresence mode='wait'>
