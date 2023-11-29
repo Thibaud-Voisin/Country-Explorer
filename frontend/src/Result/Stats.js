@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEarthAmericas, faLanguage, faCity, faCoins, faPeopleGroup, faScaleUnbalancedFlip, faRuler } from '@fortawesome/free-solid-svg-icons' // Import the FontAwesomeIcon component
 
 const Stats = ({ name, continent, capital, languages, currencies, population, populationAvg, area, areaAvg, gini, giniAvg }) => {
-    // Function to format the numbers to a more readable format
+  // Function to format the numbers to a more readable format
   function formatNumber (num) {
     if (num === 0) return num
     if (num < 1) return `${(num * 100)}%`

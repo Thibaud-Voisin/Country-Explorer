@@ -2,14 +2,14 @@ import { React } from 'react'
 import propTypes from 'prop-types'
 
 const Carousel = ({ images }) => {
-  //Function to get to a specific image
+  // Function to get to a specific image
   function goToSlide (slideId) {
     const slideElement = document.querySelector(slideId)
     if (slideElement) {
       slideElement.scrollIntoView({ behavior: 'smooth' })
     }
   }
-    // Rendering the carousel
+  // Rendering the carousel
   return (
     <div className="carousel rounded-2xl w-full h-full">
         <div id="slide1" className="carousel-item relative w-full">
