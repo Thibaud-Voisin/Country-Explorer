@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const { getCountryInfo } = require('../services/countryService');
+const express = require('express')
+const router = express.Router()
+const { getCountryInfo } = require('../services/countryService')
 
-router.post('/info', express.json(), getCountryInfo);
+router.post('/info', express.json(), getCountryInfo)
 
-module.exports = router;
+module.exports = router
