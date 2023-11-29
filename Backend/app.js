@@ -7,7 +7,7 @@ require('dotenv').config()
 
 const port = process.env.PORT || 4000
 
-app.use(cors({ origin: 'http://localhost:3000' }))
+app.use(cors({ origin: 'http://localhost:3001' }))
 app.use('/countries', countryRoutes)
 app.use('/flags', flagRoutes)
 

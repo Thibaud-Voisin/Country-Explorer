@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import Title from './Result/Title';
-import Carousel from './Result/Carousel';
-import Interactive_Map from './Result/Interactive_Map';
-import Stats from './Result/Stats';
+import React, { useEffect } from 'react'
+import { motion } from 'framer-motion'
+import PropTypes from 'prop-types'
+import Title from './Result/Title'
+import Carousel from './Result/Carousel'
+import InteractiveMap from './Result/InteractiveMap'
+import Stats from './Result/Stats'
 
-const Result = ({ new_search, setnew_search, isCountryRetrieved, Country_Data }) => {
-
-
+const Result = ({ theme, newSearch, setnewSearch, isCountryRetrieved, countryData }) => {
   const {
     images,
     name,
@@ -23,53 +22,49 @@ const Result = ({ new_search, setnew_search, isCountryRetrieved, Country_Data })
     area,
     areaAvg,
     gini,
-    giniAvg,
-  } = Country_Data;
-
+    giniAvg
+  } = countryData
 
   useEffect(() => {
-    if (new_search) {
-      console.log("new search");
-      scrollToBottom();
-      setnew_search(false);
+    if (newSearch) {
+      console.log('new search')
+      scrollToBottom()
+      setnewSearch(false)
     }
-    
-  }, [new_search]);
-
+  }, [newSearch, setnewSearch])
 
   const scrollToBottom = () => {
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.body.scrollHeight;
-    const scrollHeight = documentHeight - windowHeight;
+    const windowHeight = window.innerHeight
 
     const scrollTo = () => {
       window.scrollTo({
-        top: scrollHeight,
-        behavior: 'smooth',
-      });
-    };
+        top: windowHeight,
+        behavior: 'smooth'
+      })
+    }
 
     setTimeout(() => {
-      scrollTo();
-    }, 100);
-  };
+      scrollTo()
+    }, 100)
+  }
 
-  return isCountryRetrieved ? (
+  return isCountryRetrieved
+    ? (
     <motion.div
-      className='result w-[100vw] h-[100vh] relative'
+      className='result w-[100vw] h-[175vh] relative'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <Title name={name} flag={flag} arms={arms} subName={subName}/>
-      <div className="grid grid-cols-5 gap-8 p-8 mb-10">
-        <div className="h-[55vh] col-span-3 w-full">
+      <Title theme={theme} name={name} flag={flag} arms={arms} subName={subName}/>
+      <div className="xl:grid xl:grid-cols-5 xl:gap-6 xl:p-8 p-2 xl:mb-10">
+        <div className="xl:h-[55vh] h-[30vh] xl:col-span-3 xl:m-0 m-2">
           <Carousel images={images} isCountryRetrieved={isCountryRetrieved}/>
         </div>
-        <div className="col-span-2 w-full">
-          <Interactive_Map name={name}/>
+        <div className="xl:col-span-2 xl:m-0 m-2">
+          <InteractiveMap name={name}/>
         </div>
-        <div className="col-span-5 w-full">
+        <div className="xl:col-span-5 xl:m-0 m-2">
           <Stats
             name={name}
             continent={continent}
@@ -86,7 +81,16 @@ const Result = ({ new_search, setnew_search, isCountryRetrieved, Country_Data })
         </div>
       </div>
     </motion.div>
-  ) : null;
-};
+      )
+    : null
+}
 
-export default Result;
+Result.propTypes = {
+  theme: PropTypes.string.isRequired,
+  newSearch: PropTypes.bool.isRequired,
+  setnewSearch: PropTypes.func.isRequired,
+  isCountryRetrieved: PropTypes.bool.isRequired,
+  countryData: PropTypes.object.isRequired
+}
+
+export default Result

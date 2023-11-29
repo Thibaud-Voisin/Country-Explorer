@@ -1,16 +1,13 @@
-import {React, useState, useEffect}  from 'react';
+import { React } from 'react'
+import propTypes from 'prop-types'
 
-
-const Carousel = ({ images, isCountryRetrieved }) => {
-    const [currentImg, setCurrentImg] = useState(1);
-
-    function goToSlide(slideId) {
-      const slideElement = document.querySelector(slideId);
-      if (slideElement) {
-        slideElement.scrollIntoView({ behavior: 'smooth' });
-        setCurrentImg(parseInt(slideId.slice(-1)));
-      }
+const Carousel = ({ images }) => {
+  function goToSlide (slideId) {
+    const slideElement = document.querySelector(slideId)
+    if (slideElement) {
+      slideElement.scrollIntoView({ behavior: 'smooth' })
     }
+  }
   return (
     <div className="carousel rounded-2xl w-full h-full">
         <div id="slide1" className="carousel-item relative w-full">
@@ -42,7 +39,11 @@ const Carousel = ({ images, isCountryRetrieved }) => {
             </div>
         </div>
     </div>
-  );
-};
+  )
+}
 
-export default Carousel;
+Carousel.propTypes = {
+  images: propTypes.arrayOf(propTypes.string)
+}
+
+export default Carousel

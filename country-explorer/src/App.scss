@@ -2,126 +2,35 @@
   font-family: 'SuisseIntl';
   src: url('./fonts/SuisseIntl-Regular.ttf') format('truetype');
 }
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Questrial&display=swap');@import 'tailwindcss/base';
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Questrial&display=swap');
+@import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
 body{
-  min-height: 100vh;
   overflow: hidden;
+  min-height: 100vh;
+  background: linear-gradient(140deg, rgba(6,2,36,1) 0%, rgba(4,4,54,1) 100%);
 }
+@media screen and (max-width: 1279px) {
+  body{
+    overflow: auto;
+  }
 
-.header{
-  z-index: 10;
-  position: fixed;
 }
 
 ::-webkit-scrollbar {
   display: none;
 }
 
-.container {
-  min-width: 100vw;
-  //100-6 (footer size)
-  min-height: 94vh;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: white;
-}
-
-.theme_selector {
-  padding: 10px;
-  fill: snow;
-}
-
-.main_input {
-  border-radius: 10px;
-}
-
-.title {
+.SuisseIntl {
   font-family: 'SuisseIntl', sans-serif;
-    margin-top: 14vh;
-  font-size: 5vw;
-  font-weight: bold;
-  color: snow;
 }
 
-.sub_title_results {
-  font-family: 'SuisseIntl', sans-serif;
-    margin-top: 14vh;
-  font-size: 2.5vw;
-  font-weight: bold;
-  color: snow;
-}
-
-.sub_title_results_2 {
-  font-family: 'SuisseIntl', sans-serif;
-  font-size: 30px;
-  font-weight: bold;
-  color: snow;
-}
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-}
-
-.sub_title {
+.Comfortaa {
   font-family: 'Comfortaa', sans-serif;
-  font-size: 30px;
-  margin-top : 4.5vh;
-  color: snow;
 }
 
-[data-theme="dark"] {
-  .App {
-    background: linear-gradient(140deg, rgba(6,2,36,1) 0%, rgba(4,4,54,1) 100%);
-  }
-
-  .main_input::placeholder{
-    color: #d6d4d4;
-  }
-
-  .main_input{
-    border-color: snow;
-  }
-  .up_btn{
-    background-color: #9ca3af;
-  }
-  .up_btn:hover{
-    background-color: white;
-  }
-}
-
-[data-theme="cupcake"] {
-  .sub_title_results {
-    color: #000505;
-  }
-  .App{
-    background: linear-gradient(320deg, rgba(250,230,189,1) 0%, rgba(254,251,247,1) 100%);
-  }
-  .main_input{
-    background-color: #FCF6EC;
-  }
-  .title {
-    color: #000505;
-  }
-  
-  .sub_title{
-    color: #000505;
-  }
-  
-  .theme_selector{
-    fill: #000505;
-  }
-
-  .footer
-  {
-    color: #000505;
-  }
-
+[data-theme="cupcake"] body{
+  background: linear-gradient(320deg, rgba(250,230,189,1) 0%, rgba(254,251,247,1) 100%);
 }

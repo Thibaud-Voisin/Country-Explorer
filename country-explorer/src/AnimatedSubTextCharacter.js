@@ -1,50 +1,55 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React from 'react'
+import { motion } from 'framer-motion'
+import PropTypes from 'prop-types'
 
 const AnimatedSubTextCharacter = ({ text }) => {
-  const letters = Array.from(text);
+  const letters = Array.from(text)
 
   const container = {
     hidden: { opacity: 0 },
     visible: (i = 1) => ({
       opacity: 1,
-      transition: { staggerChildren: 0.008, delayChildren: 0.02 * i} // Add a delay of 1 second},
-    }),
-  };
+      transition: { staggerChildren: 0.008, delayChildren: 0.02 * i }
+    })
+  }
 
   const child = {
     visible: {
       opacity: 1,
       transition: {
-        type: "spring",
+        type: 'spring',
         damping: 6,
-        stiffness: 100,
-      },
+        stiffness: 100
+      }
     },
     hidden: {
       opacity: 0,
       transition: {
-        type: "spring",
+        type: 'spring',
         damping: 6,
-        stiffness:100,
-      },
-    },
-  };
+        stiffness: 100
+      }
+    }
+  }
 
   return (
-    <motion.div className="sub_title"
-      style={{ overflow: "hidden", display: "flex" }}
+    <motion.div className={'mt-[4.5vh] xl:text-[1.5vw] text-[2.5vw] Comfortaa}'}
+      style={{ overflow: 'hidden', display: 'flex' }}
       variants={container}
       initial="hidden"
       animate="visible"
     >
       {letters.map((letter, index) => (
         <motion.span variants={child} key={index}>
-          {letter === " " ? "\u00A0" : letter}
+          {letter === ' ' ? '\u00A0' : letter}
         </motion.span>
       ))}
     </motion.div>
-  );
-};
+  )
+}
 
-export default AnimatedSubTextCharacter;
+AnimatedSubTextCharacter.propTypes = {
+  text: PropTypes.string.isRequired
+}
+
+export default AnimatedSubTextCharacter

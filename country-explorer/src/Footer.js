@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
 const Footer = () => {
   return (
-<footer className="footer h-[6vh] items-center p-4  text-neutral-content">
+<footer className="fixed footer bottom-0 left-0  h-[6vh] items-center p-4">
     <aside className="items-center grid-flow-col">
         <p>Copyright © 2023 Bounce Insights - All rights reserved</p>
     </aside>
@@ -14,7 +14,7 @@ const Footer = () => {
  </svg></a>
   </nav>
 </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

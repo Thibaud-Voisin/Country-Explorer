@@ -1,12 +1,8 @@
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import React from 'react';
-
-const Interactive_Map = ({ Name }) => {
-
-    const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
-
-
-
+const InteractiveMap = ({ name }) => {
+  const apiKey = process.env.REACT_APP_GOOGLE_API_KEY
 
   return (
 
@@ -18,14 +14,14 @@ const Interactive_Map = ({ Name }) => {
             className='h-full w-full'
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
-            src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${Name}&maptype=satellite`}>
+            src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${name}&maptype=satellite`}>
         </iframe>
     </figure>
     <div className="card-body">
         <div className="flex items-center justify-between">
-            <h3 className="card-title">{Name}'s Map</h3>
+            <h3 className="card-title">{name}&apos;s Map</h3>
             <div className="flex items-center">
-                <button className="btn btn-primary" onClick={()=>document.getElementById('my_modal_1').showModal()}>EXPAND</button>
+                <button className="btn btn-primary" onClick={() => document.getElementById('my_modal_1').showModal()}>EXPAND</button>
             </div>
         </div>
     </div>
@@ -37,7 +33,7 @@ const Interactive_Map = ({ Name }) => {
                 className='rounded-2xl h-full w-full'
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
-                src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${Name}&maptype=satellite`}>
+                src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${name}&maptype=satellite`}>
             </iframe>
             <div className="modal-action">
                 <form method="dialog">
@@ -47,7 +43,11 @@ const Interactive_Map = ({ Name }) => {
         </div>
     </dialog>
 </div>
-  );
-};
+  )
+}
 
-export default Interactive_Map;
+InteractiveMap.propTypes = {
+  name: PropTypes.string.isRequired
+}
+
+export default InteractiveMap
