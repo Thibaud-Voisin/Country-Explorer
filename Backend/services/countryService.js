@@ -46,17 +46,17 @@ async function getCountryInfo (req, res) {
     }
 
     // Fetching images based on the country name
-    const imageUrl = `https://api.unsplash.com/search/photos?page=1&query=${foundCountry.name.common}&client_id=${imageApiKey}`
-    const imageResponse = await axios.get(imageUrl)
-    if (imageResponse.status !== 200 || !imageResponse.data.results) {
-      throw new Error('Failed to fetch images or unexpected response')
-    }
-    const imagesData = imageResponse.data
-    ImageUrls = imagesData.results.slice(0, 4).map(result => result.urls.regular) // Extracting image URLs
+    //const imageUrl = `https://api.unsplash.com/search/photos?page=1&query=${foundCountry.name.common}&client_id=${imageApiKey}`
+    //const imageResponse = await axios.get(imageUrl)
+    //if (imageResponse.status !== 200 || !imageResponse.data.results) {
+    //  throw new Error('Failed to fetch images or unexpected response')
+    //}
+    //const imagesData = imageResponse.data
+    //ImageUrls = imagesData.results.slice(0, 4).map(result => result.urls.regular) // Extracting image URLs
 
     // Constructing country data object with default values if information is missing
     const countryData = {
-      images: ImageUrls.length ? ImageUrls : ['default_image_url'],
+      images: ImageUrls.length ? ImageUrls : ['default_image_url', 'default_image_url', 'default_image_url', 'default_image_url'],
       name: foundCountry.name?.common || 'Default Name',
       subName: foundCountry.name?.official || 'Default Official Name',
       flag: foundCountry.flags?.png || 'Default Flag URL',
