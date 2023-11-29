@@ -3,14 +3,7 @@ import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
 
 const Header = ({ toggleTheme, isVisibleAlert }) => {
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      console.log('isVisibleAlert changed:', isVisibleAlert)
-    }
-
-    handleVisibilityChange()
-  }, [isVisibleAlert])
-
+  // Function to scroll to the top of the page
   const scrollUp = () => {
     const scrollTo = () => {
       window.scrollTo({
@@ -23,6 +16,8 @@ const Header = ({ toggleTheme, isVisibleAlert }) => {
       scrollTo()
     }, 100)
   }
+
+  // Rendering the header
   return (
 <header className='z-10 fixed w-full'>
   <div className='flex justify-end'>

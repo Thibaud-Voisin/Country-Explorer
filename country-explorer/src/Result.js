@@ -25,6 +25,7 @@ const Result = ({ theme, newSearch, setnewSearch, isCountryRetrieved, countryDat
     giniAvg
   } = countryData
 
+  // Scroll to the bottom of the page when a new search is performed
   useEffect(() => {
     if (newSearch) {
       console.log('new search')
@@ -48,6 +49,7 @@ const Result = ({ theme, newSearch, setnewSearch, isCountryRetrieved, countryDat
     }, 100)
   }
 
+  // Rendering the result
   return isCountryRetrieved
     ? (
     <motion.div

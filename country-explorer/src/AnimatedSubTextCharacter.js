@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 const AnimatedSubTextCharacter = ({ text }) => {
   const letters = Array.from(text)
 
+  // Animation variants
   const container = {
     hidden: { opacity: 0 },
     visible: (i = 1) => ({
@@ -12,7 +13,6 @@ const AnimatedSubTextCharacter = ({ text }) => {
       transition: { staggerChildren: 0.008, delayChildren: 0.02 * i }
     })
   }
-
   const child = {
     visible: {
       opacity: 1,
@@ -32,6 +32,7 @@ const AnimatedSubTextCharacter = ({ text }) => {
     }
   }
 
+  // Rendering the animated text
   return (
     <motion.div className={'mt-[4.5vh] xl:text-[1.5vw] text-[2.5vw] Comfortaa}'}
       style={{ overflow: 'hidden', display: 'flex' }}

@@ -7,7 +7,9 @@ import AnimatedSubTextCharacter from './AnimatedSubTextCharacter'
 import { motion, AnimatePresence } from 'framer-motion'
 import Result from './Result'
 
+// Main content component
 const MainContent = ({ theme, options, API_URL }) => {
+  // Array of texts to display
   const texts = [
     'COUNTRY EXPLORER',
     'EXPLORADOR DE PAÍSES',
@@ -40,6 +42,7 @@ const MainContent = ({ theme, options, API_URL }) => {
     Gini_AVG: ''
   })
 
+  // Function to fetch the selected country information
   const getSelectedCountry = async () => {
     if (selectedCountry && selectedCountry.label) {
       try {
@@ -71,6 +74,7 @@ const MainContent = ({ theme, options, API_URL }) => {
     }
   }
 
+  // Styling the select component
   const selectStyles = {
     control: (base, state) => ({
       ...base,
@@ -114,6 +118,7 @@ const MainContent = ({ theme, options, API_URL }) => {
     })
   }
 
+  // Custom option component
   const { Option } = components
 
   const IconOption = props => (
@@ -129,6 +134,7 @@ const MainContent = ({ theme, options, API_URL }) => {
     </Option>
   )
 
+  // Adding a delay to show the text input
   useEffect(() => {
     setTimeout(() => {
       setshowTextInput(true)
@@ -144,6 +150,7 @@ const MainContent = ({ theme, options, API_URL }) => {
     }
   }, [texts.length, theme])
 
+  // Rendering the main content
   return (
 
     <div>

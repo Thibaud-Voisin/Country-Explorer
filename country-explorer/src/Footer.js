@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Footer = () => {
+  // Rendering the footer
   return (
 <footer className="fixed footer bottom-0 left-0  h-[6vh] items-center p-4">
     <aside className="items-center grid-flow-col">

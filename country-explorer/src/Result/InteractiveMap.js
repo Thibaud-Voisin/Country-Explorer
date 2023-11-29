@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const InteractiveMap = ({ name }) => {
-  const apiKey = process.env.REACT_APP_GOOGLE_API_KEY
+  const apiKey = process.env.REACT_APP_GOOGLE_API_KEY // Get the API key from the .env.local file
 
+  // Rendering the map
   return (
-
 <div className="card card-compact shadow-xl w-full h-full bg-base-100">
     <figure className='h-full'>
         <iframe
@@ -25,6 +25,7 @@ const InteractiveMap = ({ name }) => {
             </div>
         </div>
     </div>
+    {/* Modal for the fullscreen map */}
     <dialog id="my_modal_1" className="modal mb-[5vh]">
         <div className="modal-box max-w-[80vw] h-[80vh] flex flex-col items-center justify-between px-10 pt-10 ">
             <iframe

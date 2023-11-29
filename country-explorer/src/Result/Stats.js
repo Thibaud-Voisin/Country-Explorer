@@ -1,9 +1,10 @@
 import React from 'react'
 import propTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEarthAmericas, faLanguage, faCity, faCoins, faPeopleGroup, faScaleUnbalancedFlip, faRuler } from '@fortawesome/free-solid-svg-icons'
+import { faEarthAmericas, faLanguage, faCity, faCoins, faPeopleGroup, faScaleUnbalancedFlip, faRuler } from '@fortawesome/free-solid-svg-icons' // Import the FontAwesomeIcon component
 
 const Stats = ({ name, continent, capital, languages, currencies, population, populationAvg, area, areaAvg, gini, giniAvg }) => {
+    // Function to format the numbers to a more readable format
   function formatNumber (num) {
     if (num === 0) return num
     if (num < 1) return `${(num * 100)}%`
@@ -14,6 +15,7 @@ const Stats = ({ name, continent, capital, languages, currencies, population, po
     if (num >= 1e12) return `${(num / 1e12).toFixed(1)}T`
   }
 
+  // Rendering the stats
   return (
 <div className="stats shadow flex flex-col xl:flex-row ">
     {continent && (
