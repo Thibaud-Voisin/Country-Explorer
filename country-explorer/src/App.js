@@ -8,7 +8,7 @@ function App () {
   const API_URL = 'http://localhost:4000'
   const [theme, setTheme] = useState('dark')
   const [options, setOptions] = useState([])
-  const [isVisibleAlert, setIsVisibleAlert] = useState(false) // State to manage visibility
+  const [isVisibleAlert, setIsVisibleAlert] = useState(false)
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'cupcake' : 'dark')
@@ -19,7 +19,7 @@ function App () {
       try {
         const response = await fetch(`${API_URL}/flags/all`)
         if (!response.ok) {
-          setIsVisibleAlert(true) // Set isVisibleAlert to true for error case
+          setIsVisibleAlert(true)
           console.log('Error fetching data')
           throw new Error('Network response was not ok')
         }
@@ -33,9 +33,9 @@ function App () {
           a.label.localeCompare(b.label)
         )
         setOptions(sortedOptions)
-        setIsVisibleAlert(false) // Reset isVisibleAlert to false on successful fetch
+        setIsVisibleAlert(false)
       } catch (error) {
-        setIsVisibleAlert(true) // Set isVisibleAlert to true for error case
+        setIsVisibleAlert(true)
         console.error('Error fetching data:', error)
       }
     }
