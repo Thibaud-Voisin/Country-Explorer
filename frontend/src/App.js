@@ -6,7 +6,7 @@ import Header from './Header'
 
 // Main App component
 function App () {
-  const API_URL = 'https://country-explorer-backend-1.vercel.app'
+  const API_URL = 'https://country-explorer-backend.vercel.app'
   const [theme, setTheme] = useState('dark')
   const [options, setOptions] = useState([])
   const [isVisibleAlert, setIsVisibleAlert] = useState(false)
