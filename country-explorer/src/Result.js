@@ -20,8 +20,8 @@ const Result = ({ new_search, setnew_search, isCountryRetrieved, Country_Data })
     currencies,
     population,
     populationAvg,
-    superficy,
-    superficyAvg,
+    area,
+    areaAvg,
     gini,
     giniAvg,
   } = Country_Data;
@@ -78,8 +78,8 @@ const Result = ({ new_search, setnew_search, isCountryRetrieved, Country_Data })
             currencies={currencies}
             population={population}
             populationAvg={populationAvg}
-            superficy={superficy}
-            superficyAvg={superficyAvg}
+            area={area}
+            areaAvg={areaAvg}
             gini={gini}
             giniAvg={giniAvg}
           />

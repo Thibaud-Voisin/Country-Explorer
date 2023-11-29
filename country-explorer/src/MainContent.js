@@ -37,8 +37,8 @@ const MainContent = ({ theme, options, API_URL }) => {
     Currencies: [],
     Population: '',
     Population_AVG: '',
-    Superficy: '',
-    Superficy_AVG: '',
+    Area: '',
+    Area_AVG: '',
     Gini: '',
     Gini_AVG: '',
   });

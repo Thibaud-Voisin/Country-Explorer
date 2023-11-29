@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEarthAmericas, faLanguage, faCity, faCoins, faPeopleGroup, faScaleUnbalancedFlip, faRuler } from '@fortawesome/free-solid-svg-icons';
 
 
-const Stats = ({name, continent, capital, languages, currencies, population, populationAvg, superficy, superficyAvg, gini, giniAvg }) => {
+const Stats = ({name, continent, capital, languages, currencies, population, populationAvg, area, areaAvg, gini, giniAvg }) => {
 
     function formatNumber(num) {
         if (num === 0) return num;
@@ -140,14 +140,14 @@ const Stats = ({name, continent, capital, languages, currencies, population, pop
   </div>
 )}
 
-{typeof superficy !== 'undefined' && typeof superficyAvg !== 'undefined' && superficy > 0 && superficyAvg > 0 && (
+{typeof area !== 'undefined' && typeof areaAvg !== 'undefined' && area > 0 && areaAvg > 0 && (
   <div className="stat">
     <div className="stat-figure text-secondary">
       <FontAwesomeIcon icon={faRuler} size="2x"/>
     </div>
-    <div className="stat-title">Superficy</div>
-    <div className="stat-value text-2xl">{formatNumber(superficy)} km²</div>
-    <div className="stat-desc">{(superficy > superficyAvg) ? '↗' : '↘︎'} - Average: {formatNumber(superficyAvg)}</div>
+    <div className="stat-title">Area</div>
+    <div className="stat-value text-2xl">{formatNumber(area)} km²</div>
+    <div className="stat-desc">{(area > areaAvg) ? '↗' : '↘︎'} - Average: {formatNumber(areaAvg)}</div>
   </div>
 )}
 
