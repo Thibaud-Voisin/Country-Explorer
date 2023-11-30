@@ -1,6 +1,7 @@
 # Country Explorer
 
-![alt text](https://i.ibb.co/T8drLR8/ce2.png)
+
+![alt text](https://i.postimg.cc/X7R9MCJf/ce2.png)
 
 ## 📝 Description
 
