@@ -189,6 +189,7 @@ const MainContent = ({ theme, options, API_URL }) => {
                 }}
                 styles={selectStyles}
                 components={{ Option: IconOption }}
+                className='selectCountry'
               />
               <button onClick={getSelectedCountry} className={`xl:ml-1 xl:rounded-r-lg rounded-lg  xl:mt-[4vh] mt-[2vh] xl:text-xl text-[3vw] h-[8vh] xl:w-[7vw] w-[24vw] border border-gray-500 ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'} ${theme === 'dark' ? 'text-white' : 'text-black'} ${theme === 'dark' ? 'hover:border-white' : 'hover:border-black'}`}>Search</button>
             </div>
