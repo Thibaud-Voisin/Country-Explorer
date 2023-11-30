@@ -9,6 +9,8 @@ require('dotenv').config()
 const port = process.env.PORT || 4000
 
 app.use(cors({ origin: 'https://country-explorer-lovat.vercel.app' }))
+// app.use(cors({ origin: 'http://localhost:3000' }))
+
 app.use('/countries', countryRoutes)
 app.use('/flags', flagRoutes)
 app.use('/', homeRoutes)

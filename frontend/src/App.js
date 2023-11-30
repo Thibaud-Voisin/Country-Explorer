@@ -6,6 +6,7 @@ import Header from './Header'
 
 // Main App component
 function App () {
+  // const API_URL = 'http://localhost:4000'
   const API_URL = 'https://country-explorer-backend.vercel.app'
   const [theme, setTheme] = useState('dark')
   const [options, setOptions] = useState([])
