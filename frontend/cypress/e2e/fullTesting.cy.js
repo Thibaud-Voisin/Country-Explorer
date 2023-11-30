@@ -1,5 +1,6 @@
 describe('template spec', () => {
   it('passes', () => {
+    cy.viewport(1920, 1000);
     cy.visit('https://country-explorer-lovat.vercel.app')
     cy.wait(500)
     cy.get('.selectCountry').click()
